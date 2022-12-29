@@ -59,6 +59,10 @@ public class User {
 
     }
 
+    public void showRole(Role role){
+        this.roles.contains("ROLE_USER");
+    }
+
 
 
 

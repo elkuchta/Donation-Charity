@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -73,12 +74,24 @@ public class UserServiceImpl implements UserService {
     public void deleteAdmin(User user,@AuthenticationPrincipal CurrentUser currentUser) {
         if(userRepository.getUserById(user.getId())!=userRepository.getUserById(currentUser.getUser().getId())) {
             Role role=roleRepository.findByName("ROLE_USER");
+
+            user.removeRole(role);
+
+
+            userRepository.deleteById(user.getId());}
+
+
+    }
+
+    @Override
+    public void deleteMyProfile(User user,@AuthenticationPrincipal CurrentUser currentUser){
+        if(userRepository.getUserById(user.getId())==userRepository.getUserById(currentUser.getUser().getId())&&currentUser.getUser().getRoles().contains(roleRepository.findByName("ROLE_USER"))) {
+            Role role=roleRepository.findByName("ROLE_USER");
             Role rolee=roleRepository.findByName("ROLE_ADMIN");
             user.removeRole(role);
             user.removeRole(rolee);
 
             userRepository.deleteById(user.getId());}
-
 
     }
 

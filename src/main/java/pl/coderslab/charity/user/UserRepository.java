@@ -5,8 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.charity.CurrentUser;
+import pl.coderslab.charity.role.Role;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
@@ -23,4 +26,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
    User getUserById(Long id);
 
   List <User> findAll();
+
+  void deleteUserById(Long id);
+
+  User getUserByRoles(Set<Role> roles);
+
+
 }
