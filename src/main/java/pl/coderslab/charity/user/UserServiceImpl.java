@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteMyProfile(User user,@AuthenticationPrincipal CurrentUser currentUser){
-        if(userRepository.getUserById(user.getId())==userRepository.getUserById(currentUser.getUser().getId())&&currentUser.getUser().getRoles().contains(roleRepository.findByName("ROLE_USER"))) {
+        if(userRepository.getUserById(user.getId())==userRepository.getUserById(currentUser.getUser().getId())) {
             Role role=roleRepository.findByName("ROLE_USER");
             Role rolee=roleRepository.findByName("ROLE_ADMIN");
             user.removeRole(role);

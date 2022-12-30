@@ -71,7 +71,7 @@
 
                     <a href="/profile/delete/${userlogged.id}"> <button class="btn" > Usuń moje konto</button></a>
                     <a href="/profile/edit"> <button class="btn" > Edytuj dane</button></a>
-                   <%-- <a href="/admin/editAdmin/${user.id}"> <button class="btn" > Zmień hasło </button></a>--%>
+                    <a href="/profile/changePassword"> <button class="btn" > Zmień hasło </button></a>
 
 
 

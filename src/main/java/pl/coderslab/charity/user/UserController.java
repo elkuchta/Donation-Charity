@@ -52,4 +52,19 @@ public class UserController {
         return "redirect:/logout";
     }
 
+
+    @GetMapping("/profile/changePassword")
+    public String changePasswordAdmin(@AuthenticationPrincipal CurrentUser currentUser, Model model){
+
+        model.addAttribute("user",userRepository.getUserById(currentUser.getUser().getId()));
+
+        return "changePassword";
+    }
+    @PostMapping("/profile/changePassword")
+    public String changePasswordAdmin(@Valid User user){
+
+        userService.changePassword(user);
+        return "redirect:/profile";
+    }
+
 }
