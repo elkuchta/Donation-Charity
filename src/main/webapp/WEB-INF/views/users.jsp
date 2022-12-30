@@ -26,7 +26,7 @@
                 </sec:authorize>
 
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="/profile">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li><a href="/admin/users">Użytkownicy</a></li>
@@ -70,6 +70,7 @@
 
                                     <a href="/admin/new/${user.id}">  <button class="btn" >Zrób administratorem</button></a>
                                     <a href="/admin/deleteuser/${user.id}"> <button class="btn" > Usuń</button></a>
+                                    <a href="/admin/editAdmin/${user.id}"> <button class="btn" > Edytuj dane</button></a>
                                     <c:choose>
                                         <c:when test="${user.enabled==1}">
                                         <a href="/admin/userblock/${user.id}">  <button class="btn" > Zablokuj</button></a>

@@ -65,7 +65,8 @@
                                         <div class="title">${user.username}</div>
                                         <div class="subtitle">${user.email}</div>
                                         <br>
-                                        <br><a href="/admin/editAdmin/${user.id}"> <button class="btn" > Edytuj dane</button></a>
+                                        <br>
+                                        <a href="/admin/editAdmin/${user.id}"> <button class="btn" > Edytuj dane</button></a>
 
                                        <c:if test="${user.id!=current.id}" >
 

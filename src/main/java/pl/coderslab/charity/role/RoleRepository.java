@@ -11,5 +11,7 @@ import java.util.List;
         Role findByName(String name);
         Role findById(int id);
         List<Role>findAll();
+
+        Role getById(int id);
     }
 

@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
                 </sec:authorize>
 
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="/profile">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li><a href="#">Użytkownicy</a></li>

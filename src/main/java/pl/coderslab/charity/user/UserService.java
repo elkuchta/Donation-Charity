@@ -22,4 +22,6 @@ public interface UserService {
 
     void changePassword(User user);
 
+    void deleteMyProfile(User user,@AuthenticationPrincipal CurrentUser currentUser);
+
 }
