@@ -24,4 +24,6 @@ public interface UserService {
 
     void deleteMyProfile(User user,@AuthenticationPrincipal CurrentUser currentUser);
 
+  /*  void saveUserActivationEmail(User user,String email);
+*/
 }

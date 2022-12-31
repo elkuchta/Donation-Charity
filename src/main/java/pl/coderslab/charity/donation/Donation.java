@@ -1,15 +1,16 @@
 package pl.coderslab.charity.donation;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.institution.Institution;
+import pl.coderslab.charity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -45,5 +46,13 @@ public class Donation {
     @OneToOne
     private Institution institution;
 
+    @OneToOne
+    private User user;
+@Column(name = "Statusy")
+    private boolean Status;
 
-}
+
+    }
+
+
+

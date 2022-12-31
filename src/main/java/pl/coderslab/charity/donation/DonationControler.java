@@ -23,11 +23,14 @@ public class DonationControler {
     private final DonationService donationService;
     private final UserRepository userRepository;
 
+
+
     public DonationControler(CategoryRepository categoryRepository, InstitutionRepository institutionRepository, DonationService donationService, UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
         this.institutionRepository = institutionRepository;
         this.donationService = donationService;
         this.userRepository = userRepository;
+
     }
 
     @RequestMapping("/formConfirmation")
@@ -39,11 +42,12 @@ public class DonationControler {
     }
 
     @GetMapping("/donate")
-    public String Donate( Model model){
+    public String Donate( Model model,@AuthenticationPrincipal CurrentUser currentUser){
 
         model.addAttribute("category",categoryRepository.findAll());
         model.addAttribute("institution", institutionRepository.findAll());
         model.addAttribute("donation", new Donation());
+        model.addAttribute("user",userRepository.getUserById(currentUser.getUser().getId()));
 
 
         return"form";

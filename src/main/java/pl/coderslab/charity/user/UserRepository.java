@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.charity.CurrentUser;
 import pl.coderslab.charity.role.Role;
 
 import java.util.List;
@@ -30,6 +29,16 @@ public interface UserRepository extends JpaRepository<User,Long> {
   void deleteUserById(Long id);
 
   User getUserByRoles(Set<Role> roles);
+User getByEmail(String email);
 
+@Query("SELECT u.email FROM users u WHERE u.id=( SELECT max(z.id) FROM users z)")
+
+String getEmail();
+
+User findUserByToken (String token);
+
+boolean existsByToken(String token);
+
+User getUserByToken(String token);
 
 }

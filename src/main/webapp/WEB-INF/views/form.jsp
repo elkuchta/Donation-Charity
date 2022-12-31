@@ -100,6 +100,8 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 <form:form modelAttribute="donation" method="post"  >
+  <form:hidden path="user" value="${user.id}" />
+
 
 
 

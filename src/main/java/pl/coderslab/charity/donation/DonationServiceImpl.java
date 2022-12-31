@@ -13,6 +13,7 @@ public class DonationServiceImpl implements DonationService{
 
     @Override
     public void saveDonation(Donation donation) {
+        donation.setStatus(false);
         donationRepository.save(donation);
 
     }

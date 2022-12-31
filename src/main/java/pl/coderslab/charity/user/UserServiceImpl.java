@@ -1,15 +1,17 @@
 package pl.coderslab.charity.user;
 
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.coderslab.charity.CurrentUser;
+import pl.coderslab.charity.mail.EmailService;
 import pl.coderslab.charity.role.Role;
 import pl.coderslab.charity.role.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,16 +19,18 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
 
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
-                           BCryptPasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder passwordEncoder, EmailService emailService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
 
 
+        this.emailService = emailService;
     }
 
     @Override
@@ -34,14 +38,35 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
+/*@Override
+        public void saveUserActivationEmail(User user) {
+
+    userRepository.save(new User(email, password, Role.USER));
+    String text = "http://localhost:8080/activate?code=" + user.getActivationCode();
+    SimpleMailMessage message = new SimpleMailMessage();
+    message.setFrom("noreply@example.com");
+    message.setSubject("Confirmation email");
+    message.setText(text);
+    message.setTo(email);
+    mailSender.send(message);
+
+}*/
+
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        user.setEnabled(1);
+        user.setEnabled(0);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        UUID uuid = UUID.randomUUID();
+        user.setToken(uuid.toString());
+
         userRepository.save(user);
+        emailService.sendActivationEmail(user.getEmail(), "Kliknij w link by potwierdzić założenie konta: http://localhost:8080/confirm/user/" + uuid);
+
+
+
     }
     @Override
     public void saveUserAdmin(User user) {
