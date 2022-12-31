@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import pl.coderslab.charity.user.UserRepository;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -22,4 +23,16 @@ public class EmailServiceImpl implements EmailService {
 
         emailSender.send(message);
     }
+
+    public void sendActivationEmail(String to, String text){
+
+        SimpleMailMessage message=new SimpleMailMessage();
+        message.setFrom("charity.donation.chd@gmail.com");
+        message.setTo (to);
+        message.setSubject("Link do aktywacji konta");
+        message.setText(text);
+
+        emailSender.send(message);
+    }
+
 }

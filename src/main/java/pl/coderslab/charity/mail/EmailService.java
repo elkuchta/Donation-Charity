@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface EmailService {
 
     void sendSimpleMessage(String subject, String text);
+
+    void sendActivationEmail(String to,  String text);
 }

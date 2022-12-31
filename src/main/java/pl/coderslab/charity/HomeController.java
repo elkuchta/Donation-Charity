@@ -16,6 +16,7 @@ import pl.coderslab.charity.user.UserService;
 
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 
 @Controller
@@ -77,7 +78,16 @@ public class HomeController {
 
             return "registerForm";
         }
+
         userService.saveUser(user);
+
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/confirm/user/{uuid}")
+    public String confirmMail(@PathVariable String uuid) {
+      if(userRepository.existsByToken(uuid)){
+          userService.setUserEnabled(userRepository.getUserByToken(uuid));
+      }return "redirect:/";
     }
 }
