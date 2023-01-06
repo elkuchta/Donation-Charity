@@ -70,7 +70,7 @@ public class HomeController {
         return "registerForm";
     }
     @PostMapping("/register")
-    public String register(Model model,@Valid User user, BindingResult result)  {
+    public String register(@RequestParam("pass") String pass,Model model,@Valid User user, BindingResult result)  {
 
 
 
@@ -79,9 +79,15 @@ public class HomeController {
             return "registerForm";
         }
 
-        userService.saveUser(user);
+        if(pass.equals(user.getPassword())){
+            userService.saveUser(user);
 
-        return "redirect:/login";
+            return "redirect:/login";
+        }
+      else{
+            model.addAttribute("pass", "niepoprawne powtórzenie hasła");
+        }
+      return "registerForm";
     }
 
     @RequestMapping(value = "/confirm/user/{uuid}")
@@ -89,5 +95,23 @@ public class HomeController {
       if(userRepository.existsByToken(uuid)){
           userService.setUserEnabled(userRepository.getUserByToken(uuid));
       }return "redirect:/";
+    }
+
+    @GetMapping(value = "/remind")
+    public String remindForm(){
+        return "remindPassword";
+    }
+    @PostMapping(value = "/remind")
+    public String remindProcess(Model model,RedirectAttributes redirectAttrs, @RequestParam("email") String email){
+        User user = userRepository.findByEmail(email);
+        if (user!=null){
+            UUID uuid = UUID.randomUUID();
+            user.setPasswordToken(uuid.toString());
+            emailService.sendRemindPasswordEmail(email,"Kliknij w link by zmienić hasło: http://localhost:8080/confirm/user/" + uuid);
+        } else {
+            model.addAttribute("email", "Użytkownik z takim mailem nie istnieje");
+return "remindPassword";
+        }
+        return "redirect:/";
     }
 }

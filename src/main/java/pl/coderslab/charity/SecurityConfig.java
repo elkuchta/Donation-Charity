@@ -33,6 +33,7 @@ private DataSource dataSource;
                 .antMatchers("/register").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/confirm/**").permitAll()
+                .antMatchers("/remind").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated()

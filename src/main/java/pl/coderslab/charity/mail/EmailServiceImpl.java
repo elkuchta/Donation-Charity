@@ -35,4 +35,14 @@ public class EmailServiceImpl implements EmailService {
         emailSender.send(message);
     }
 
+    public void sendRemindPasswordEmail(String to, String text){
+        SimpleMailMessage message=new SimpleMailMessage();
+        message.setFrom("charity.donation.chd@gmail.com");
+        message.setTo (to);
+        message.setSubject("Link do zmiany hasła");
+        message.setText(text);
+
+        emailSender.send(message);
+    }
+
 }

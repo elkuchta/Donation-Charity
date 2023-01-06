@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -30,30 +29,21 @@
     </nav>
 </header>
 
-
 <section class="login-page">
-    <h2 >Załóż konto</h2>
-    <form:form modelAttribute="user" method="post">
+    <h2 >Zaloguj się</h2>
+    <form method="post" class="user" action="/remind">
+        <div class="form-group">
+            <input type="email" name="email" placeholder="email" />
+            <span>${email}</span>
+        </div>
 
-        <div class="form-group">
-            <form:input path="username" type="text" name="username" placeholder="Login" />
-        </div>
-        <div class="form-group">
-            <form:input path="email" type="email" name="email" placeholder="Email" />
-        </div>
-        <div class="form-group">
-            <form:input path="password" type="password" name="password" placeholder="Hasło" />
-        </div>
-        <div class="form-group">
-            <input type="password" name="pass" placeholder="Powtórz hasło"  />
-            <span>${pass}</span>
-        </div>
 
         <div class="form-group form-group--buttons">
-            <a href="/login" class="btn btn--without-border">Zaloguj się</a>
-            <button class="btn" type="submit">Załóż konto</button>
+            <a href="/register" class="btn btn--without-border">Załóż konto</a>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button class="btn" type="submit">Zresetuj hasło</button>
         </div>
-    </form:form>
+    </form>
 </section>
 
 <%@ include file="footer.jsp" %>
