@@ -70,7 +70,7 @@ public class HomeController {
         return "registerForm";
     }
     @PostMapping("/register")
-    public String register(Model model,@Valid User user, BindingResult result)  {
+    public String register(@RequestParam("pass") String pass,Model model,@Valid User user, BindingResult result)  {
 
 
 
@@ -79,9 +79,15 @@ public class HomeController {
             return "registerForm";
         }
 
-        userService.saveUser(user);
+        if(pass.equals(user.getPassword())){
+            userService.saveUser(user);
 
-        return "redirect:/login";
+            return "redirect:/login";
+        }
+      else{
+            model.addAttribute("pass", "niepoprawne powtórzenie hasła");
+        }
+      return "registerForm";
     }
 
     @RequestMapping(value = "/confirm/user/{uuid}")
