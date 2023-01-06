@@ -9,4 +9,6 @@ public interface EmailService {
     void sendSimpleMessage(String subject, String text);
 
     void sendActivationEmail(String to,  String text);
+
+    void sendRemindPasswordEmail(String to, String text);
 }

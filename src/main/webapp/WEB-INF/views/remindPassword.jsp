@@ -31,19 +31,17 @@
 
 <section class="login-page">
     <h2 >Zaloguj się</h2>
-    <form method="post" class="user">
+    <form method="post" class="user" action="/remind">
         <div class="form-group">
-            <input type="text" name="username" placeholder="login" />
+            <input type="email" name="email" placeholder="email" />
+            <span>${email}</span>
         </div>
-        <div class="form-group">
-            <input type="password" name="password" placeholder="Hasło" />
-            <a href="/remind" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
-        </div>
+
 
         <div class="form-group form-group--buttons">
             <a href="/register" class="btn btn--without-border">Załóż konto</a>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <button class="btn" type="submit">Zaloguj się</button>
+            <button class="btn" type="submit">Zresetuj hasło</button>
         </div>
     </form>
 </section>

@@ -51,6 +51,8 @@ public class User {
 
     private String token;
 
+    private String passwordToken;
+
 
     public  void addRole(Role role){
         this.roles.add(role);

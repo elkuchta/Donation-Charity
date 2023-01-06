@@ -96,4 +96,22 @@ public class HomeController {
           userService.setUserEnabled(userRepository.getUserByToken(uuid));
       }return "redirect:/";
     }
+
+    @GetMapping(value = "/remind")
+    public String remindForm(){
+        return "remindPassword";
+    }
+    @PostMapping(value = "/remind")
+    public String remindProcess(Model model,RedirectAttributes redirectAttrs, @RequestParam("email") String email){
+        User user = userRepository.findByEmail(email);
+        if (user!=null){
+            UUID uuid = UUID.randomUUID();
+            user.setPasswordToken(uuid.toString());
+            emailService.sendRemindPasswordEmail(email,"Kliknij w link by zmienić hasło: http://localhost:8080/confirm/user/" + uuid);
+        } else {
+            model.addAttribute("email", "Użytkownik z takim mailem nie istnieje");
+return "remindPassword";
+        }
+        return "redirect:/";
+    }
 }
