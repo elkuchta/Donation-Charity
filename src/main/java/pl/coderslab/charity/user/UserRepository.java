@@ -43,4 +43,9 @@ boolean existsByToken(String token);
 
 User getUserByToken(String token);
 
+User getUserByPasswordToken(String passwordToken);
+
+
+
+
 }

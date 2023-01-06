@@ -103,15 +103,35 @@ public class HomeController {
     }
     @PostMapping(value = "/remind")
     public String remindProcess(Model model,RedirectAttributes redirectAttrs, @RequestParam("email") String email){
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.getByEmail(email);
         if (user!=null){
             UUID uuid = UUID.randomUUID();
             user.setPasswordToken(uuid.toString());
-            emailService.sendRemindPasswordEmail(email,"Kliknij w link by zmienić hasło: http://localhost:8080/confirm/user/" + uuid);
+            userService.saveTokenToChangePassword(user);
+            emailService.sendRemindPasswordEmail(email,"Kliknij w link by zmienić hasło: http://localhost:8080/newPassword/" + uuid);
         } else {
             model.addAttribute("email", "Użytkownik z takim mailem nie istnieje");
 return "remindPassword";
         }
         return "redirect:/";
     }
+
+    @GetMapping(value = "/newPassword/{uuid}")
+        public String newPassword(Model model,@PathVariable String uuid){
+
+       model.addAttribute("user",userRepository.getUserByPasswordToken(uuid));
+
+       return "newPassword";
+        }
+
+        @PostMapping(value = "/newPassword/{uuid}")
+    public String newPassword(@Valid User user){
+
+            userService.changePassword(user);
+            return "redirect:/login";
+        }
+
+
+
+
 }

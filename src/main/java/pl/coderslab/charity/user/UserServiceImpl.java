@@ -156,5 +156,14 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
+@Override
+    public void removeToken(User user) {
+    user.setPasswordToken(user.getPasswordToken());
 }
+
+        @Override
+                public void saveTokenToChangePassword(User user){
+            userRepository.save(user);
+    }
+}
+

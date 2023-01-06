@@ -34,6 +34,9 @@ private DataSource dataSource;
                 .antMatchers("/login").permitAll()
                 .antMatchers("/confirm/**").permitAll()
                 .antMatchers("/remind").permitAll()
+                .antMatchers("/newPassword/**").permitAll()
+
+
                 .antMatchers("/admin/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated()

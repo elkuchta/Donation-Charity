@@ -24,6 +24,9 @@ public interface UserService {
 
     void deleteMyProfile(User user,@AuthenticationPrincipal CurrentUser currentUser);
 
+    void removeToken(User user);
+
+    void saveTokenToChangePassword(User user);
   /*  void saveUserActivationEmail(User user,String email);
 */
 }
