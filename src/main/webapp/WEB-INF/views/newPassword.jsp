@@ -52,6 +52,10 @@
                                 <form:password itemValue="id" itemLabel="password" path="password" placeholder="**********" />
                                 Nowe hasło
                             </div>
+                            <div class="form-group">
+                                <input type="password" name="pass" placeholder="Powtórz hasło"  />Powtórz hasło
+                                <br>  <span>${pass}</span></br>
+                            </div>
 
                             <div class="form-group form-group--buttons">
                                 <button class="btn" type="submit">Zmień hasło</button>

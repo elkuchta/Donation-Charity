@@ -30,6 +30,9 @@
 </header>
 
 <section class="login-page">
+     <c:if test="${not empty info}">  <h2>
+        ${info}</h2>
+    </c:if>
     <h2 >Zaloguj się</h2>
     <form method="post" class="user">
         <div class="form-group">

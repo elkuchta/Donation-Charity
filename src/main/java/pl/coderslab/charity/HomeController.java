@@ -70,7 +70,7 @@ public class HomeController {
         return "registerForm";
     }
     @PostMapping("/register")
-    public String register(@RequestParam("pass") String pass,Model model,@Valid User user, BindingResult result)  {
+    public String register(@RequestParam("pass") String pass,Model model,@Valid User user, BindingResult result,RedirectAttributes redirectAttrs)  {
 
 
 
@@ -81,7 +81,7 @@ public class HomeController {
 
         if(pass.equals(user.getPassword())){
             userService.saveUser(user);
-
+            redirectAttrs.addFlashAttribute("info", "Na podanego maila został wysłany link do aktywacji konta");
             return "redirect:/login";
         }
       else{
@@ -113,22 +113,35 @@ public class HomeController {
             model.addAttribute("email", "Użytkownik z takim mailem nie istnieje");
 return "remindPassword";
         }
+        redirectAttrs.addFlashAttribute("info", "Na podanego maila został wysłany link do zmiany hasła");
         return "redirect:/";
     }
 
     @GetMapping(value = "/newPassword/{uuid}")
-        public String newPassword(Model model,@PathVariable String uuid){
-
+        public String newPassword(Model model,@PathVariable String uuid,RedirectAttributes redirectAttrs){
+        if(userRepository.existsByPasswordToken(uuid)){
        model.addAttribute("user",userRepository.getUserByPasswordToken(uuid));
+            return "newPassword";
 
-       return "newPassword";
+        } else{
+            redirectAttrs.addFlashAttribute("info", "Podany link jest już nie aktywny, wygeneruj nowy");
+            return "redirect:/remind";
+        }
         }
 
         @PostMapping(value = "/newPassword/{uuid}")
-    public String newPassword(@Valid User user){
+    public String newPassword(@Valid User user,Model model,@RequestParam("pass") String pass){
 
-            userService.changePassword(user);
-            return "redirect:/login";
+            if(pass.equals(user.getPassword())){
+                userService.changePassword(user);
+
+                return "redirect:/login";
+            }
+            else{
+                model.addAttribute("pass", "Niepoprawne powtórzone hasło");
+            }
+
+            return "newPassword";
         }
 
 

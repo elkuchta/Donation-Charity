@@ -45,6 +45,8 @@ User getUserByToken(String token);
 
 User getUserByPasswordToken(String passwordToken);
 
+boolean existsByPasswordToken(String passwordToken);
+
 
 
 

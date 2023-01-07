@@ -30,7 +30,9 @@
 </header>
 
 <section class="login-page">
-    <h2 >Zaloguj się</h2>
+    <h2 >  <c:if test="${not empty info}">
+        ${info}
+    </c:if></h2>
     <form method="post" class="user" action="/remind">
         <div class="form-group">
             <input type="email" name="email" placeholder="email" />

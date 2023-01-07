@@ -141,6 +141,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setUserEnabled(User user){
         user.setEnabled(1);
+        user.setToken(null);
         userRepository.save(user);
     }
 
@@ -154,6 +155,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPasswordToken(null);
         userRepository.save(user);
     }
 @Override
