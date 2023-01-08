@@ -181,4 +181,10 @@ public class AdminController {
         return "redirect:/admin/list";
     }
 
+    @RequestMapping("/admin/donations")
+    public String userDonations(@AuthenticationPrincipal CurrentUser currentUser,Model model){
+        model.addAttribute("donations",donationRepository.findAll());
+        return "donationsList";
+    }
+
 }

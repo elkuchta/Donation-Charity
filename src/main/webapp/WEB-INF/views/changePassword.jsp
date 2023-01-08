@@ -28,24 +28,24 @@
 
                 <ul class="dropdown">
                     <li><a href="/profile">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="/user/donations">Moje zbiórki</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
-                        <li><a href="#">Użytkownicy</a></li>
-                        <li><a href="#">Administratorzy</a></li>
-                        <li><a href="#">Zebrane dary</a></li>
+                        <li><a href="/admin/users">Użytkownicy</a></li>
+                        <li><a href="/admin/list">Administratorzy</a></li>
+                        <li><a href="/admin/donations">Zebrane dary</a></li>
                         <li><a href="/admin/institutions">Instytucje</a></li>
                     </sec:authorize>
                     <li><a href="/logout">Wyloguj</a></li>
                 </ul>
             </li>
         </ul>
-
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
-            <li><a href="index.html#steps" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="index.html#about-us" class="btn btn--without-border">O nas</a></li>
-            <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
+            <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="#" class="btn btn--without-border">O nas</a></li>
+            <li><a href="/institutions" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="/donate" class="btn btn--without-border">Przekaż dary</a></li>
+            <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
     <div class="slogan container container--90">
@@ -71,6 +71,7 @@
 
                             <div class="form-group form-group--buttons">
                                 <button class="btn" type="submit">Zmień hasło</button>
+                                <a href="/profile"  class="btn" type="submit" value="Zapisz zmiany">Wróć</a>
                             </div>
 
                         </form:form>

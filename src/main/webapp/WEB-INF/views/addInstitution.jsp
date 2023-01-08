@@ -27,11 +27,11 @@
 
                 <ul class="dropdown">
                     <li><a href="/profile">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="/user/donations">Moje zbiórki</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li><a href="/admin/users">Użytkownicy</a></li>
-                        <li><a href="#">Administratorzy</a></li>
-                        <li><a href="#">Zebrane dary</a></li>
+                        <li><a href="/admin/list">Administratorzy</a></li>
+                        <li><a href="/admin/donations">Zebrane dary</a></li>
                         <li><a href="/admin/institutions">Instytucje</a></li>
                     </sec:authorize>
                     <li><a href="/logout">Wyloguj</a></li>

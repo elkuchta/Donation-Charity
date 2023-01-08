@@ -34,8 +34,8 @@
                     <li><a href="/user/donations">Moje zbiórki</a></li>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li><a href="/admin/users">Użytkownicy</a></li>
-                        <li><a href="#">Administratorzy</a></li>
-                        <li><a href="#">Zebrane dary</a></li>
+                        <li><a href="/admin/list">Administratorzy</a></li>
+                        <li><a href="/admin/donations">Zebrane dary</a></li>
                         <li><a href="/admin/institutions">Instytucje</a></li>
                     </sec:authorize>
                     <li><a href="/logout">Wyloguj</a></li>
@@ -49,29 +49,13 @@
             </c:otherwise>
         </c:choose>
     </ul>
-          <%--  <li class="logged-user">
-                <sec:authorize access="isAuthenticated()">
-                    Hi! <sec:authentication property="principal.username"/>
-                </sec:authorize>
 
-                <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <ul class="nav--actions">
-            <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
-            <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
-        </ul>--%>
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="#" class="btn btn--without-border">O nas</a></li>
-            <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="/institutions" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="/donate" class="btn btn--without-border">Przekaż dary</a></li>
             <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
         </ul>
@@ -82,6 +66,10 @@
             <c:if test="${not empty info}"> <h2>
         ${info}</h2>
             </c:if>
+            <c:if test="${not empty send}">
+                <h2>   ${send}  </h2>
+            </c:if>
+
             <h1>
                 Zacznij pomagać!<br/>
                 Oddaj niechciane rzeczy w zaufane ręce

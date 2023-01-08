@@ -56,9 +56,10 @@ public class HomeController {
     }
 
     @PostMapping(value = "/contact")
-    public String contactProcess(RedirectAttributes redirectAttrs, @AuthenticationPrincipal CurrentUser currentUser, @RequestParam("name") String name, @RequestParam("surname") String surname, @RequestParam("message") String message){
-        emailService.sendSimpleMessage(name + "," + surname,message);
-        redirectAttrs.addFlashAttribute("info", "Wiadomość została wysłana");
+    public String contactProcess(RedirectAttributes redirectAttrs, @AuthenticationPrincipal CurrentUser currentUser, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("message") String message){
+        emailService.sendSimpleMessage(name + ", email: "+ email ,message);
+        emailService.sendSimpleMessageTwo(message,email);
+        redirectAttrs.addFlashAttribute("send", "Wiadomość została wysłana");
         return "redirect:/";
     }
 
@@ -144,6 +145,12 @@ return "remindPassword";
             return "newPassword";
         }
 
+    @RequestMapping("/institutions")
+    public String showInstitutions(Model model){
+        model.addAttribute("institutions", institutionRepository.findAll());
+
+        return "institutions";
+    }
 
 
 

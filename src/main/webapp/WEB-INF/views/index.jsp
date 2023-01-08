@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <a href="#" class="btn btn--large">Załóż konto</a>
+    <a href="/register" class="btn btn--large">Załóż konto</a>
 </section>
 
 <section class="about-us">
@@ -108,17 +108,13 @@
 <footer>
     <div class="contact" id="contact">
         <h2>
-            <c:if test="${empty info}">
                 Skontaktuj się z nami
-            </c:if>
-            <c:if test="${not empty info}">
-                ${info}
-            </c:if>
+
         </h2>
         <h3>Formularz kontaktowy</h3>
         <form class="form--contact" method="post" action="/contact">
             <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię"/></div>
-            <div class="form-group form-group--50"><input type="text" name="surname" placeholder="Nazwisko"/></div>
+            <div class="form-group form-group--50"><input type="email" name="email" placeholder="Email"/></div>
 
             <div class="form-group"><input type="textarea" name="message" placeholder="Wiadomość" rows="1"/></div>
           <%--  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
